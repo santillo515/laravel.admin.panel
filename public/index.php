@@ -58,3 +58,9 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+    //подключаем файл init.php
+
+require __DIR__.'/../config/init.php';
+require __DIR__.'/../config/params.php';
+new\App\SBlog\Core\BlogApp();
