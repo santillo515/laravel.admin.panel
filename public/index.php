@@ -59,7 +59,7 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-    //подключаем файл init.php
+    /*//подключаем файл init.php*/
 
 require __DIR__.'/../config/init.php';
 require __DIR__.'/../config/params.php';
