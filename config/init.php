@@ -1,7 +1,7 @@
 <?php
 
 
-// Объявили константу ROOT
+/*Объявили константу ROOT*/
 
 if (!defined('ROOT')) define('ROOT', dirname(__DIR__));
 if (!defined('WWW')) define('WWW', ROOT. '/public');
@@ -20,13 +20,15 @@ if (!defined('IMG')) define('IMG', '/public/uploads/single');
     if (isset($_SERVER['HTTP_HOST'])) {
         $host = $_SERVER['HTTP_HOST'];
     }
-    //Создаем переменную, и подключаем уже сам файл в public
+   /* //Создаем переменную, и подключаем уже сам файл в public*/
+
 
     $allowed_hosts = 'http://laravel.admin.panel/index.php';
 
-   // "http://laravel.admin.panel/index.php"
+    /*"http://laravel.admin.panel/index.php"*/
 
     $app_path = preg_replace('#[^/]+$#', '', $allowed_hosts);
+    /*// "http://laravel.admin.panel/index.php"*/
     $app_path = preg_replace('/public/', '', $app_path);
 
     if (!defined('PATH')) define('PATH',$app_path);
