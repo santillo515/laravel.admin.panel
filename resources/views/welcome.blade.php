@@ -12,8 +12,12 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-image: url("{{asset('images/main.jpg')}}");
+                -moz-background-size: 100% 100%;
+                -webkit-background-size: 100% 100%;
+                -o-background-size: 100% 100%;
+                background-size: 100% 100%;
+                color: #08f74f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -61,6 +65,12 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            a {
+                padding: 5px;
+                margin-right: 40px;
+                border: 1px solid darkblue;
+            }
         </style>
     </head>
     <body>
@@ -68,14 +78,49 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+{{--                        //если юзер не вошел-то показываем главную--}}
+                        @if (Auth::user()->isDisabled())
+                            <strong> <a href="{{url('/')}}" style="color: #6574cd; text-decoration: none">Главная</a></strong>
+
+                            {{--//если юзер вошел то показываем кабинет-главная--}}
+                    @elseif (Auth::user()->isUser())
+                            <strong> <a href="{{url('/user/index')}}" style="color: #6574cd; text-decoration: none">Кабинет</a></strong>
+                                <strong> <a href="{{url('/')}}" style="color: #6574cd; text-decoration: none">Главная</a></strong>
+
+{{--                            если визитор вошел то показываем главную--}}
+                        @elseif (Auth::user()->isVisitor())
+                            <strong> <a href="{{url('/')}}" style="color: #6574cd; text-decoration: none">Главная</a></strong>
+
+                            {{--//если вошел админ то показываем панель-и главную--}}
+                        @elseif (Auth::user()->isAdministrator())
+                            <strong> <a href="{{url('/admin/index')}}" style="color: #6574cd; text-decoration: none">Панель Администратора</a></strong>
+                                <strong> <a href="{{url('/')}}" style="color: #6574cd; text-decoration: none">Главная</a></strong>
+
+                        @endif
+                        <strong>
+                            <a class="dropdown-item" href="{{ route('logout') }}" style="color: #6574cd; text-decoration: none"
+                               ohclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                               Выйти
+                            </a>
+                        </strong>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {!!csrf_field () !!}
+                        </form>
+
+                        {{--/**если вы уже вошли то убираем кнопку входа, будет только кнопка выйти*/--}}
+                        @else
+                            <strong>
+                                <a href="{{ route('login') }}" style="color: #6574cd; text-decoration: none">Войти</a>
+                            </strong>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <strong>
+                                <a href="{{ route('register') }}" style="color: #4dc0b5; text-decoration: none">Регистрация</a>
+                            </strong>
                         @endif
-                    @endauth
+                        @endauth
                 </div>
             @endif
 
@@ -84,16 +129,7 @@
                     Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+
             </div>
         </div>
     </body>
