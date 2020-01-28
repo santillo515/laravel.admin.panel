@@ -8,9 +8,20 @@ use MetaTag;
 
 class MainController extends AdminBaseController
 {
-   public function index()
-   {
-       MetaTag::setTags(['title' => 'Админ панель']);
-       return view('blog.admin.main.index');
-   }
+    private $orderRepository;
+    private $productRepository;
+
+   /* public function __construct()
+    {
+        parent::__construct();
+        $this->orderRepository = app(OrderRepository::class);
+        $this->productRepository = app(ProductRepository::class);
+    }*/
+
+
+    public function index()
+    {
+        MetaTag::setTags(['title' => 'Админ панель']);
+        return view('blog.admin.main.index');
+    }
 }
