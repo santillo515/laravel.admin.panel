@@ -16,11 +16,12 @@ class MainController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
-    {  MetaTag::setTags(['title' => 'Пользователь']);
-       return view('blog.user.index');
+    {
+        MetaTag::setTags(['title' => 'Пользователь']);
+        return view('blog.user.index');
     }
 
     /**
