@@ -8,6 +8,9 @@ use App\Http\Controllers\Blog\BaseController as MainBaseController;
 
 abstract class AdminBaseController extends MainBaseController
 {
+    /**
+     * AdminBaseController constructor.
+     */
     public function __construct()
 {
     $this->middleware('auth');

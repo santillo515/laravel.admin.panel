@@ -27,21 +27,21 @@ class MainRepository extends CoreRepository
         $users = \DB::table('users')
             ->get()
             ->count();
-            return $users;
+        return $users;
     }
 
     public static function getCountProducts() {
         $prod = \DB::table('products')
             ->get()
             ->count();
-            return $prod;
+        return $prod;
     }
 
-     public static function getCountCategories() {
+    public static function getCountCategories() {
         $cat = \DB::table('categories')
             ->get()
             ->count();
-            return $cat;
+        return $cat;
     }
 
 }

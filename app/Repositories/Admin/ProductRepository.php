@@ -21,7 +21,7 @@ class ProductRepository extends CoreRepository
 
     public function getLastProducts($perpage) {
         $get = $this->startConditions()
-            ->orderBy('id', 'desc')
+            ->orderBy('id','desc')
             ->limit($perpage)
             ->paginate($perpage);
         return $get;
